@@ -1,0 +1,19 @@
+{
+	"description": "This shows the formatted bookmarks.",
+	"manifest_version": 2,
+	"name": "BookmarkViewer",
+	"version": "2.0.0",
+	"homepage_url": "https://github.com/alprut/bkviewer",
+	"icons": {
+		"16": "icons/favicon.png",
+		"32": "icons/icon.png",
+	},
+
+	"background": {
+		"scripts": ["background.js"]
+	},
+
+	"browser_action": {
+		"default_icon": "icons/icon.png"
+	}
+}
