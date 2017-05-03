@@ -15,5 +15,9 @@
 
 	"browser_action": {
 		"default_icon": "icons/icon.png"
-	}
+	},
+
+	"permissions": [
+		"bookmarks"
+	]
 }
