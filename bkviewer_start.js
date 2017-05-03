@@ -1,5 +1,5 @@
 $(function(){
-	$('body').append('<p>Hello, World !</p>');
-	$('.bkviewer').show_bookmarks({ });
+	$('style').bkviewer_stylist_index();
+	$('.bkviewer').bkviewer_index();
 });
 

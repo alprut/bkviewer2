@@ -5,11 +5,9 @@ return this.each(function() {
 	}
 
 	function add_category_view(json, target, context) {
-		console.log("category: " + json.title);
 	}
 
 	function add_item_view(json, target, context) {
-		console.log("item: " + json.title + ": " + json.url);
 	}
 
 	function fini(target, context) {
@@ -56,14 +54,23 @@ return this.each(function() {
 			}
 		}
 
-		if (item_set.length != 0)
-			opts.add_category_view(category, target, context);
+		if (item_set.length != 0) {
+			let json = { 'title': category.title};
+
+			opts.add_category_view(json, target, context);
+		}
 
 		for (i = 0; i < item_set.length; i++) {
 			item = item_set[i];
 
+			let json = {
+				'title': item.title,
+				'uri':   item.url,
+				'favicon': "icons/favicon.png"
+			};
+
 			// TODO: Adds favicon
-			favicon_tag = opts.add_item_view(item, target, context);
+			favicon_tag = opts.add_item_view(json, target, context);
 		}
 
 		if (! category_is_first) {
