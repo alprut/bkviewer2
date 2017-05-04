@@ -17,7 +17,13 @@
 		"default_icon": "icons/icon.png"
 	},
 
+	"options_ui": {
+		"page": "bkviewer_config.html",
+		"open_in_tab": true
+	},
+
 	"permissions": [
-		"bookmarks"
+		"bookmarks",
+		"storage"
 	]
 }
