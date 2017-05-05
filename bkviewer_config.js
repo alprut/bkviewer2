@@ -1,34 +1,6 @@
 $(function(){
-	function get_pref(key, pref_set) {
-		return browser.storage.local.get(key).then(
-			(function(the_key, the_pref_set) {
-				return function(result) {
-					if (result[the_key]) {
-						the_pref_set[the_key] =
-							result[the_key];
-					}
-				}
-			})(key, pref_set),
-			function(error) {
-				console.log(`error on getting pref: ${error}`);
-			}
-		);
-	}
-
-	function save_pref(key, value, pref_set) {
-		var data = {};
-
-		pref_set[key] = value;
-		data[key] = value;
-		browser.storage.local.set(data).then(
-			function(result) {
-			},
-			function(error) {
-				console.log(`error on saving pref: ${error}`);
-			}
-		);
-	}
-
+	var get_pref = $().get_pref
+	var save_pref = $().save_pref
 	var pref_set = {
 		"theme":	"rounded_box",
 		"frame_color":	"#00aacc",
