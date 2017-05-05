@@ -4,6 +4,9 @@ return this.each(function() {
 	var t = $(this);
 	var hiddens = new Object();
 
+	var get_pref = $().get_pref;
+	var save_pref = $().save_pref;
+
 	function remove_item(hiddens, i) {
 		var items = hiddens.items, head, tail;
 
@@ -12,11 +15,9 @@ return this.each(function() {
 		hiddens.items = head.concat(tail);
 	}
 
-/*
 	function update_hiddens(box, title, hiddens) {
-		var prefs = nsPreferences;
-		var key = "extensions.bkviewer.hiddens";
 		var i = hiddens.items.indexOf(title);
+		var pref_set = {};
 
 		if (box.css("display") == "none") {
 			if (i == -1)
@@ -26,9 +27,8 @@ return this.each(function() {
 				remove_item(hiddens, i);
 		}
 
-		prefs.setUnicharPref(key, JSON.stringify(hiddens.items));
+		save_pref("hiddens", JSON.stringify(hiddens.items), pref_set);
 	}
-*/
 
 	function toggle(box, hiddens) {
 		var title = box.prev();
@@ -49,7 +49,7 @@ return this.each(function() {
 				equal_spacing(ul, ul.children("li.bk-item"));
 			}
 
-//			update_hiddens(ul, ul.prev().text(), hiddens);
+			update_hiddens(ul, ul.prev().text(), hiddens);
 		});
 	}
 
@@ -57,13 +57,10 @@ return this.each(function() {
 		/* Users may change titles, so this synchronize
 		 * the preferences with the actual titles.
 		 */
-//		var prefs = nsPreferences;
-//		var key = "extensions.bkviewer.hiddens";
 		var new_hiddens = [];
 		var i, box, title;
+		var pref_set = {};
 
-//		hiddens.items = JSON.parse(prefs.copyUnicharPref(key, "[]"));
-		hiddens.items = [];
 		target.children().each(function() {
 			box = $(this);
 			title = box.children("li").text();
@@ -76,7 +73,7 @@ return this.each(function() {
 		});
 
 		hiddens.items = new_hiddens;
-//		prefs.setUnicharPref(key, JSON.stringify(hiddens.items));
+		save_pref("hiddens", JSON.stringify(hiddens.items), pref_set);
 	}
 
 	function align_width(contents) {
@@ -163,7 +160,14 @@ return this.each(function() {
 				});
 			});
 
-			hide_categories(target, hiddens);
+			var pref_set = { hiddens: "[]" };
+			get_pref("hiddens", pref_set).then(
+				function(result) {
+					hiddens.items =
+						JSON.parse(pref_set.hiddens);
+					hide_categories(target, hiddens);
+				}
+			);
 		}
 	});
 
