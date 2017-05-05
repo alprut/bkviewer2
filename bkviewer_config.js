@@ -174,6 +174,7 @@ $(function(){
 	function show_config(pref_set) {
 		show_theme_config(pref_set);
 		show_zoom_config(pref_set);
+		show_color_config(pref_set);
 	}
 
 	var promise_set = [];

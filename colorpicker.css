@@ -1,0 +1,212 @@
+.colorpicker {
+	width: 360px;
+	height: 176px;
+	overflow: hidden;
+	position: absolute;
+	background: url(colorpicker_background.png);
+	font-family: Arial, Helvetica, sans-serif;
+	display: none;
+}
+.colorpicker_color {
+	width: 150px;
+	height: 150px;
+	left: 14px;
+	top: 13px;
+	position: absolute;
+	background: #f00;
+	overflow: hidden;
+	cursor: crosshair;
+}
+.colorpicker_color div {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 150px;
+	height: 150px;
+	background: url(colorpicker_overlay.png);
+}
+.colorpicker_color div div {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 11px;
+	height: 11px;
+	overflow: hidden;
+	background: url(colorpicker_select.gif);
+	margin: -5px 0 0 -5px;
+}
+.colorpicker_hue {
+	position: absolute;
+	top: 13px;
+	left: 171px;
+	width: 35px;
+	height: 150px;
+	cursor: n-resize;
+}
+.colorpicker_hue div {
+	position: absolute;
+	width: 35px;
+	height: 9px;
+	overflow: hidden;
+	background: url(colorpicker_indic.gif) left top;
+	margin: -4px 0 0 0;
+	left: 0px;
+}
+.colorpicker_new_color {
+	position: absolute;
+	width: 60px;
+	height: 32px;
+	left: 284px;
+	top: 12px;
+	background: #f00;
+	border-color: #AEB5C1;
+	border-radius: 2px 2px 2px 2px;
+	border-style: solid;
+	border-width: 2px;
+}
+
+.colorpicker input {
+	background-color: transparent;
+	border: 1px solid transparent;
+	position: absolute;
+	font-size: 10px;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #000000;
+	top: 6px;
+	right: 11px;
+	text-align: right;
+	margin: 0;
+	padding: 0;
+	height: 11px;
+	outline: 0;
+}
+.colorpicker_hex {
+	position: absolute;
+	width: 64px;
+	height: 22px;
+	background: url(colorpicker_hex.png) top;
+	left: 212px;
+	top: 19px;
+}
+.colorpicker_hex input {
+	right: 6px;
+}
+.colorpicker_field {
+	height: 22px;
+	width: 64px;
+	background-position: top;
+	position: absolute;
+}
+.colorpicker_field span {
+	position: absolute;
+	width: 12px;
+	height: 22px;
+	overflow: hidden;
+	top: 0;
+	right: 0;
+	cursor: n-resize;
+}
+.colorpicker_rgb_r {
+	background-image: url(colorpicker_rgb_r.png);
+	top: 56px;
+	left: 212px;
+}
+.colorpicker_rgb_g {
+	background-image: url(colorpicker_rgb_g.png);
+	top: 86px;
+	left: 212px;
+}
+.colorpicker_rgb_b {
+	background-image: url(colorpicker_rgb_b.png);
+	top: 116px;
+	left: 212px;
+}
+.colorpicker_hsb_h {
+	background-image: url(colorpicker_hsb_h.png);
+	top: 56px;
+	left: 284px;
+}
+.colorpicker_hsb_s {
+	background-image: url(colorpicker_hsb_s.png);
+	top: 86px;
+	left: 284px;
+}
+.colorpicker_hsb_b {
+	background-image: url(colorpicker_hsb_b.png);
+	top: 116px;
+	left: 284px;
+}
+.colorpicker_focus {
+	background-position: center;
+}
+.colorpicker_hex.colorpicker_focus {
+	background-position: bottom;
+}
+.colorpicker_slider {
+	background-position: bottom;
+}
+
+.colorpicker_btn {
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	   -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	        box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient(linear, left top, left bottom,
+				    color-stop(0.05, #ededed),
+				    color-stop(1, #cbcfd7));
+	background:     linear-gradient(center top, #ededed 5%, #cbcfd7 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(
+			startColorstr='#ededed', endColorstr='#cbcfd7');
+	background-color:#ededed;
+
+	-webkit-border-radius:3px;
+	   -moz-border-radius:3px;
+	        border-radius:3px;
+	border:1px solid #a9b0bd;
+
+	display:inline-block;
+	color:#575869;
+
+	font-family:Arial, sans-serif;
+	font-size:10px;
+	font-weight:bold;
+
+	padding:2px 6px;
+	width: 34px;
+	text-decoration:none;
+	text-shadow:1px 1px 0px #ffffff;
+	text-align: center;
+	line-height: normal;
+}
+
+.colorpicker_btn:hover {
+	cursor: default;
+	background:-webkit-gradient(linear, left top, left bottom,
+				    color-stop(0.05, #cbcfd7),
+				    color-stop(1, #ededed));
+	background:     linear-gradient(center top, #cbcfd7 5%, #ededed 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(
+			startColorstr='#cbcfd7', endColorstr='#ededed');
+	background-color:#cbcfd7;
+}
+
+.colorpicker_btn_cancel {
+	position: absolute;
+	left: 284px;
+	top: 146px;
+}
+
+.colorpicker_btn_cancel:active {
+	position:absolute;
+	top:147px;
+}
+
+.colorpicker_btn_ok {
+	position: absolute;
+	left: 229px;
+	top: 146px;
+}
+
+.colorpicker_btn_ok:active {
+	position:absolute;
+	top:147px;
+}
