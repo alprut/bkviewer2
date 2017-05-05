@@ -18,7 +18,7 @@ return this.each(function() {
 		var key = "extensions.bkviewer.hiddens";
 		var i = hiddens.items.indexOf(title);
 
-		if (box.css('display') == 'none') {
+		if (box.css("display") == "none") {
 			if (i == -1)
 				hiddens.items.push(title);
 		} else {
@@ -32,7 +32,7 @@ return this.each(function() {
 
 	function toggle(box, hiddens) {
 		var title = box.prev();
-		if (box.css('display') != 'none') {
+		if (box.css("display") != "none") {
 			title.animate({"border-bottom-left-radius": 8,
 				       "border-bottom-right-radius": 8}, 400);
 		} else {
@@ -40,13 +40,13 @@ return this.each(function() {
 		}
 		box.slideToggle(function() {
 			var ul = $(this);
-			if (ul.css('display') != 'none') {
+			if (ul.css("display") != "none") {
 				/* We have to fix spaces after showing
 				 * the category box, not before it,
 				 * because the width() of hidden items are
 				 * 1pt.
 				 */
-				equal_spacing(ul, ul.children('li.bk-item'));
+				equal_spacing(ul, ul.children("li.bk-item"));
 			}
 
 //			update_hiddens(ul, ul.prev().text(), hiddens);
@@ -66,11 +66,11 @@ return this.each(function() {
 		hiddens.items = [];
 		target.children().each(function() {
 			box = $(this);
-			title = box.children('li').text();
+			title = box.children("li").text();
 			i = hiddens.items.indexOf(title);
 			if (i != -1) {
-				box.children('li').css("border-radius", "8px");
-				box.children('ul').hide();
+				box.children("li").css("border-radius", "8px");
+				box.children("ul").hide();
 				new_hiddens.push(title);
 			}
 		});
@@ -112,17 +112,17 @@ return this.each(function() {
 		add_category_view: function(json, target, context) {
 			var result, box = target;
 
-			box = $('<ul />').addClass('bk-category')
+			box = $("<ul />").addClass("bk-category")
 					 .appendTo(box);
 
-			$('<li />').text(json['title'])
-				   .addClass('bk-category')
+			$("<li />").text(json["title"])
+				   .addClass("bk-category")
 				   .appendTo(box)
 				   .click(function() {
 					toggle($(this).next(), hiddens);
 				   });
 
-			box = $('<ul />').addClass('bk-item')
+			box = $("<ul />").addClass("bk-item")
 					 .appendTo(box);
 
 			context.cur_box = box;
@@ -132,23 +132,23 @@ return this.each(function() {
 			var box = context.cur_box, atag, img;
 			var default_height;
 
-			box = $('<li />').addClass('bk-item')
+			box = $("<li />").addClass("bk-item")
 					 .appendTo(box);
 
-			atag = $('<a />').text(json['title'])
-				  .attr({'href': json['uri']})
-				  .addClass('bk-item')
+			atag = $("<a />").text(json["title"])
+				  .attr({"href": json["uri"]})
+				  .addClass("bk-item")
 				  .appendTo(box);
 
-			img = $('<img />').addClass('favicon')
-				    .attr({'src': json['favicon']})
+			img = $("<img />").addClass("favicon")
+				    .attr({"src": json["favicon"]})
 				    .prependTo(atag);
 
 			return img;
 		},
 
 		fini: function(target, context) {
-			target.children().children('ul').addClass('bv-clearfix')
+			target.children().children("ul").addClass("bv-clearfix")
 						   .each(function() {
 				var ul = $(this);
 				align_width(ul.children());
@@ -158,7 +158,7 @@ return this.each(function() {
 					/* This condition avoids items from
 					 * setting their width to 0.
 					 */
-					if (ul.css('display') != 'none')
+					if (ul.css("display") != "none")
 						equal_spacing(ul, ul.children());
 				});
 			});

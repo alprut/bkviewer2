@@ -55,7 +55,7 @@ return this.each(function() {
 		}
 
 		if (item_set.length != 0) {
-			let json = { 'title': category.title};
+			let json = { "title": category.title};
 
 			opts.add_category_view(json, target, context);
 		}
@@ -64,9 +64,9 @@ return this.each(function() {
 			item = item_set[i];
 
 			let json = {
-				'title': item.title,
-				'uri':   item.url,
-				'favicon': "icons/favicon.png"
+				"title": item.title,
+				"uri":   item.url,
+				"favicon": "icons/favicon.png"
 			};
 
 			// TODO: Adds favicon

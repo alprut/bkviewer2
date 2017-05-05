@@ -7,10 +7,10 @@ return this.each(function() {
 		var box;
 
 		if (cur_box.height() > 500) {
-			box = $('<ul />').addClass('bk-box')
+			box = $("<ul />").addClass("bk-box")
 					 .appendTo(target);
 
-			if (prev && prev.hasClass('bk-category')) {
+			if (prev && prev.hasClass("bk-category")) {
 				box.append(prev);
 			}
 
@@ -24,14 +24,14 @@ return this.each(function() {
 
 	t.show_bookmarks({
 		init: function(target, context) {
-			context.cur_box = $('<ul />').addClass('bk-box')
+			context.cur_box = $("<ul />").addClass("bk-box")
 						     .appendTo(target);
 		},
 		add_category_view: function(json, target, context) {
 			var box, cur_box = context.cur_box;
 
-			box = $('<li />').text(json['title'])
-					 .addClass('bk-category')
+			box = $("<li />").text(json["title"])
+					 .addClass("bk-category")
 					 .appendTo(cur_box);
 
 			context.cur_box = add_box(target, cur_box, box,
@@ -42,16 +42,16 @@ return this.each(function() {
 		add_item_view: function(json, target, context) {
 			var box, cur_box = context.cur_box, atag, img;
 
-			box = $('<li />').addClass('bk-item')
+			box = $("<li />").addClass("bk-item")
 					 .appendTo(cur_box);
 
-			atag = $('<a />').text(json['title'])
-				  .attr({'href': json['uri']})
-				  .addClass('bk-item')
+			atag = $("<a />").text(json["title"])
+				  .attr({"href": json["uri"]})
+				  .addClass("bk-item")
 				  .appendTo(box);
 
-			img = $('<img />').addClass('favicon')
-					  .attr({'src': json['favicon']})
+			img = $("<img />").addClass("favicon")
+					  .attr({"src": json["favicon"]})
 					  .prependTo(atag);
 
 			context.cur_box = add_box(target, cur_box, box,
@@ -62,10 +62,10 @@ return this.each(function() {
 		},
 
 		fini: function(target, context) {
-			columns = $('.bk-box');
+			columns = $(".bk-box");
 
 			columns.css({"height": 500});
-			target.addClass('bv-clearfix');
+			target.addClass("bv-clearfix");
 
 			$(window).resize(function() {
 						equal_spacing(t, columns);
