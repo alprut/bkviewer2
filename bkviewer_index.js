@@ -102,4 +102,4 @@ return this.each(function() {
 				      "margin-left": first_margin});
 		}
 	}
-})}} (jQuery));
+})}}) (jQuery);

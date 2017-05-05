@@ -116,7 +116,7 @@ return this.each(function() {
 			console.log(`Error on getting bookmarks: ${error}`);
 		  });
 
-})}} (jQuery));
+})}}) (jQuery);
 
 (function($) {
 $.fn.stylist = function(json) {
@@ -133,4 +133,4 @@ return this.each(function() {
 
         $(this).text(style);
 
-})}} (jQuery));
+})}}) (jQuery);

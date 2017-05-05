@@ -103,4 +103,4 @@ return this.each(function() {
 
 	$(this).stylist(json);
 
-})}} (jQuery));
+})}}) (jQuery);
