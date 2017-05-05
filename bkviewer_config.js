@@ -4,8 +4,10 @@ $(function(){
 	}
 
 	function save_pref(key, value) {
+		var data = {};
+		data[key] = value;
 		console.log("save: " + key);
-		browser.storage.local.set({key: value}).then(
+		browser.storage.local.set(data).then(
 			function(result) {
 			},
 			function(error) {
