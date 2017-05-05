@@ -233,23 +233,18 @@
 				$(document).unbind('click', hide);
 			},
 			hide = function (ev) {
-				console.log("before hide");
 				if (!isChildOf(ev.data.cal.get(0), ev.target, ev.data.cal.get(0))) {
 					forceHide(ev.data.cal);
 				}
-				console.log("after hide");
 			},
 			isChildOf = function(parentEl, el, container) {
 				if (parentEl == el) {
-					console.log("parentEl == el");
 					return true;
 				}
 				if (parentEl.contains) {
-					console.log("parentEl.contains exists");
 					return parentEl.contains(el);
 				}
 				if ( parentEl.compareDocumentPosition ) {
-					console.log("parentEl.compareDocumentPosition exists");
 					return !!(parentEl.compareDocumentPosition(el) & 16);
 				}
 				var prEl = el.parentNode;
