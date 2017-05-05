@@ -1,6 +1,18 @@
 $(function(){
-	function get_pref(key) {
-		return browser.storage.local.get(key);
+	function get_pref(key, pref_set) {
+		return browser.storage.local.get(key).then(
+			(function(the_key, the_pref_set) {
+				return function(result) {
+					if (result[the_key]) {
+						the_pref_set[the_key] =
+							result[the_key];
+					}
+				}
+			})(key, pref_set),
+			function(error) {
+				console.log(`error on getting pref: ${error}`);
+			}
+		);
 	}
 
 	function save_pref(key, value) {
@@ -182,17 +194,7 @@ $(function(){
 	var promise_set = [];
 
 	for (var key in pref_set) {
-		promise_set.push(get_pref(key).then(
-			function(result) {
-				console.log(result);
-				if (result[key]) {
-					pref_set[key] = result[key];
-				}
-			},
-			function(error) {
-				console.log("error on geting pref: " + error);
-			}
-		));
+		promise_set.push(get_pref(key, pref_set));
 	}
 
 	Promise.all(promise_set).then(
