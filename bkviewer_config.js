@@ -129,7 +129,7 @@ $(function(){
 
 			if (id == pref_set['theme']) {
 				tag.addClass("checked");
-				theme_set[pref_set['theme']]['show_config']();
+				theme_set[pref_set['theme']]['show_config'](pref_set);
 			}
 		}
 	}
