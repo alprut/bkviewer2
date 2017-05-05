@@ -50,43 +50,43 @@ $(function(){
 		var columns;
 		var ptag;
 
-		$('<h2 />').text('Size')
-			   .addClass('index_config')
-			   .appendTo('body');
+		$("<h2 />").text("Size")
+			   .addClass("index_config")
+			   .appendTo("body");
 
-		ptag = $('<p />').addClass('index_config')
-				 .text('colums in the maximum window')
-				 .appendTo('body');
+		ptag = $("<p />").addClass("index_config")
+				 .text("colums in the maximum window")
+				 .appendTo("body");
 
-		$('<select />').attr({ "id": "columns", "name": "columns" })
-			       .addClass('index_config')
+		$("<select />").attr({ "id": "columns", "name": "columns" })
+			       .addClass("index_config")
 			       .prependTo(ptag);
 
 		selector = $("#columns");
 		for (var i = 1; i <= 20; i++) {
-			$('<option />').attr("value", String(i))
+			$("<option />").attr("value", String(i))
 				       .text(String(i))
 				       .appendTo(selector);
 		}
 
-		columns = pref_set['columns'];
+		columns = pref_set["columns"];
 		selector.val(String(columns));
 		selector.change(function() {
 			columns = parseInt(selector.val());
-			save_pref('columns', columns, pref_set);
+			save_pref("columns", columns, pref_set);
 		});
 
 		selector.css("font-size", selector.parent().css("font-size"));
 	}
 
 	function remove_index_config(pref_set) {
-		$('.index_config').remove();
+		$(".index_config").remove();
 	}
 
 	function show_theme_config(pref_set) {
 		var theme_set = {
 			"index": {
-				"name":          "Index",
+				"name":	  "Index",
 				"show_config":   show_index_config,
 				"remove_config": remove_index_config,
 			},
@@ -98,44 +98,44 @@ $(function(){
 		};
 
 		var base ="bkviewer_";
-		var theme_list = $('.theme_list');
+		var theme_list = $(".theme_list");
 
 		for (var id in theme_set) {
 			var theme = theme_set[id];
-			var tag = $('<li />').addClass("theme")
+			var tag = $("<li />").addClass("theme")
 					     .appendTo(theme_list);
-			tag = $('<div />').addClass("theme")
+			tag = $("<div />").addClass("theme")
 					  .appendTo(tag);
-			tag.text(theme['name']);
-			$('<br />').appendTo(tag);
+			tag.text(theme["name"]);
+			$("<br />").appendTo(tag);
 
-			tag = $('<img />').attr({ "id": id,
+			tag = $("<img />").attr({ "id": id,
 						  "src": base + id + ".png"})
 					  .addClass("theme")
 					  .appendTo(tag);
 			tag.click(function() {
-				var cur_theme = pref_set['theme'];
+				var cur_theme = pref_set["theme"];
 				theme_list.find(".checked")
 					  .removeClass("checked");
 				$(this).addClass("checked");
 
-				theme_set[cur_theme]['remove_config'](pref_set);
+				theme_set[cur_theme]["remove_config"](pref_set);
 
 				cur_theme = $(this).attr("id");
-				theme_set[cur_theme]['show_config'](pref_set);
+				theme_set[cur_theme]["show_config"](pref_set);
 
-				save_pref('theme', cur_theme, pref_set);
+				save_pref("theme", cur_theme, pref_set);
 			});
 
-			if (id == pref_set['theme']) {
+			if (id == pref_set["theme"]) {
 				tag.addClass("checked");
-				theme_set[pref_set['theme']]['show_config'](pref_set);
+				theme_set[pref_set["theme"]]["show_config"](pref_set);
 			}
 		}
 	}
 
 	function show_color_config(pref_set) {
-		var box_set = $('.color_box');
+		var box_set = $(".color_box");
 
 		box_set.each(function() {
 			var id = $(this).attr("id");
@@ -144,7 +144,7 @@ $(function(){
 			       .ColorPicker({
 				color: value,
 				onSubmit: function(hsb, hex, rgb, el) {
-					hex = '#' + hex;
+					hex = "#" + hex;
 					$(el).css("background-color", hex);
 					pref_set[$(el).attr("id")] = hex;
 					save_pref($(el).attr("id"), hex, pref_set);
@@ -162,7 +162,7 @@ $(function(){
 
 	function show_zoom_config(pref_set) {
 		var value = pref_set["zoom"];
-		var selector = $('#zoom')
+		var selector = $("#zoom")
 
 		if (value < 100 || value > 300 || (value % 25) != 0) {
 			value = 100;
@@ -171,7 +171,7 @@ $(function(){
 		value = String(value);
 
 		selector.val(value).change(function() {
-			let new_value = parseInt($('#zoom option:selected').val());
+			let new_value = parseInt($("#zoom option:selected").val());
 			pref_set["zoom"] = new_value;
 			save_pref("zoom", new_value, pref_set);
 		});
