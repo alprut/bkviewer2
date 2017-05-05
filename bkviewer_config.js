@@ -15,8 +15,10 @@ $(function(){
 		);
 	}
 
-	function save_pref(key, value) {
+	function save_pref(key, value, pref_set) {
 		var data = {};
+
+		pref_set[key] = value;
 		data[key] = value;
 		browser.storage.local.set(data).then(
 			function(result) {
@@ -71,8 +73,7 @@ $(function(){
 		selector.val(String(columns));
 		selector.change(function() {
 			columns = parseInt(selector.val());
-			pref_set['columns'] = columns;
-			save_pref('columns', columns);
+			save_pref('columns', columns, pref_set);
 		});
 
 		selector.css("font-size", selector.parent().css("font-size"));
@@ -123,8 +124,7 @@ $(function(){
 				cur_theme = $(this).attr("id");
 				theme_set[cur_theme]['show_config'](pref_set);
 
-				pref_set['theme'] = cur_theme;
-				save_pref('theme', cur_theme);
+				save_pref('theme', cur_theme, pref_set);
 			});
 
 			if (id == pref_set['theme']) {
@@ -147,7 +147,7 @@ $(function(){
 					hex = '#' + hex;
 					$(el).css("background-color", hex);
 					pref_set[$(el).attr("id")] = hex;
-					save_pref($(el).attr("id"), hex);
+					save_pref($(el).attr("id"), hex, pref_set);
 				},
 				onBeforeShow: function(el) {
 					box_set.each(function() {
@@ -173,7 +173,7 @@ $(function(){
 		selector.val(value).change(function() {
 			let new_value = parseInt($('#zoom option:selected').val());
 			pref_set["zoom"] = new_value;
-			save_pref("zoom", new_value);
+			save_pref("zoom", new_value, pref_set);
 		});
 
 		selector.css("font-size", selector.parent().css("font-size"));
