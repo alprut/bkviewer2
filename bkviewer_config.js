@@ -18,12 +18,11 @@ $(function(){
 	function save_pref(key, value) {
 		var data = {};
 		data[key] = value;
-		console.log("save: " + key);
 		browser.storage.local.set(data).then(
 			function(result) {
 			},
 			function(error) {
-				console.log("error on saving pref: " + error);
+				console.log(`error on saving pref: ${error}`);
 			}
 		);
 	}
@@ -199,11 +198,10 @@ $(function(){
 
 	Promise.all(promise_set).then(
 		function(result_set) {
-			console.log(result_set);
 			show_config(pref_set);
 		},
 		function(error) {
-			console.log("error on getting prefs: " + error);
+			console.log(`error on getting prefs: ${error}`);
 		}
 	);
 });
