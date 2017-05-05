@@ -1,42 +1,160 @@
 $(function(){
-	function get_config(key, def_value, conf, func) {
-		return browser.storage.local.get(key).then(
+	function get_pref(key) {
+		return browser.storage.local.get(key);
+	}
+
+	function save_pref(key, value) {
+		console.log("save: " + key);
+		browser.storage.local.set({key: value}).then(
 			function(result) {
-				if (result[key]) {
-					conf[key] = result.value;
-				} else {
-					conf[key] = def_value;
-				}
 			},
 			function(error) {
-				conf[key] = def_value;
-			}
-		).then(
-			function(result) {
-				func(conf);
+				console.log("error on saving pref: " + error);
 			}
 		);
 	}
 
-	function show_theme_config(conf) {
-		console.log("show_theme_config");
-		console.log(conf);
+	var pref_set = {
+		"theme":	"rounded_box",
+		"frame_color":	"rgb(0,170,204)",
+		"bg_color":	"rgb(255,255,255)",
+		"text_color":	"rgb(0,0,255)",
+		"zoom":		100,
+
+		"columns": 6
+	};
+
+	function show_rounded_box_config(pref_set) {
 	}
 
-	function show_frame_color_config(conf) {
+	function remove_rounded_box_config(pref_set) {
 	}
 
-	function show_bg_color_config(conf) {
+	function show_index_config(pref_set) {
+		var selector;
+		var columns;
+		var ptag;
+
+		$('<h2 />').text('Size')
+			   .addClass('index_config')
+			   .appendTo('body');
+
+		ptag = $('<p />').addClass('index_config')
+				 .text('colums in the maximum window')
+				 .appendTo('body');
+
+		$('<select />').attr({ "id": "columns", "name": "columns" })
+			       .addClass('index_config')
+			       .prependTo(ptag);
+
+		selector = $("#columns");
+		for (var i = 1; i <= 20; i++) {
+			$('<option />').attr("value", String(i))
+				       .text(String(i))
+				       .appendTo(selector);
+		}
+
+		columns = pref_set['columns'];
+		selector.val(String(columns));
+		selector.change(function() {
+			columns = parseInt(selector.val());
+			pref_set['columns'] = columns;
+			save_pref('columns', columns);
+		});
+
+		selector.css("font-size", selector.parent().css("font-size"));
 	}
 
-	function show_text_color_config(conf) {
+	function remove_index_config(pref_set) {
+		$('.index_config').remove();
 	}
 
-	function show_zoom_config(conf) {
+	function show_theme_config(pref_set) {
+		var theme_set = {
+			"index": {
+				"name":          "Index",
+				"show_config":   show_index_config,
+				"remove_config": remove_index_config,
+			},
+		       "rounded_box": {
+				"name":		 "Rounded Box",
+				"show_config":   show_rounded_box_config,
+				"remove_config": remove_rounded_box_config,
+			},
+		};
+
+		var base ="bkviewer_";
+		var theme_list = $('.theme_list');
+
+		for (var id in theme_set) {
+			var theme = theme_set[id];
+			var tag = $('<li />').addClass("theme")
+					     .appendTo(theme_list);
+			tag = $('<div />').addClass("theme")
+					  .appendTo(tag);
+			tag.text(theme['name']);
+			$('<br />').appendTo(tag);
+
+			tag = $('<img />').attr({ "id": id,
+						  "src": base + id + ".png"})
+					  .addClass("theme")
+					  .appendTo(tag);
+			tag.click(function() {
+				var cur_theme = pref_set['theme'];
+				theme_list.find(".checked")
+					  .removeClass("checked");
+				$(this).addClass("checked");
+
+				theme_set[cur_theme]['remove_config'](pref_set);
+
+				cur_theme = $(this).attr("id");
+				theme_set[cur_theme]['show_config'](pref_set);
+
+				pref_set['theme'] = cur_theme;
+				save_pref('theme', cur_theme);
+			});
+
+			if (id == pref_set['theme']) {
+				tag.addClass("checked");
+				theme_set[pref_set['theme']]['show_config']();
+			}
+		}
+	}
+
+	function show_color_config(pref_set) {
+		var defs = {
+			"frame_color": "rgb(0,170,204)",
+			"bg_color":    "rgb(255,255,255)",
+			"text_color":  "rgb(0,0,255)"
+		};
+		var box_set = $('.color_box');
+
+		box_set.each(function() {
+			var id = $(this).attr("id");
+			var value = pref_set[id];
+			$(this).css("background-color", value)
+			       .ColorPicker({
+				color: value,
+				onSubmit: function(hsb, hex, rgb, el) {
+					hex = '#' + hex;
+					$(el).css("background-color", hex);
+					pref_set[$(el).attr("id")] = hex;
+					save_pref($(el).attr("id"), hex);
+				},
+				onBeforeShow: function(el) {
+					box_set.each(function() {
+						if (this != el) {
+							$(this).ColorPickerHide();
+						}
+					});
+				},
+			});
+		});
+	}
+
+	function show_zoom_config(pref_set) {
+		var value = pref_set["zoom"];
 		var selector = $('#zoom')
-		var value = conf['zoom'];
-
-		console.log("zoom");
 
 		if (value < 100 || value > 300 || (value % 25) != 0) {
 			value = 100;
@@ -45,18 +163,42 @@ $(function(){
 		value = String(value);
 
 		selector.val(value).change(function() {
-			var new_value = $('#zoom option:selected').val();
-//			prefs.setIntPref(key, parseInt(new_value));
-			console.log("zoom: " + new_value);
+			let new_value = parseInt($('#zoom option:selected').val());
+			pref_set["zoom"] = new_value;
+			save_pref("zoom", new_value);
 		});
 
 		selector.css("font-size", selector.parent().css("font-size"));
 	}
 
-	var conf = {};
-	get_config("theme", "rounded_box", conf, show_theme_config);
-	get_config("frame_color", "#abc", conf, show_frame_color_config);
-	get_config("bg_color", "white", conf, show_bg_color_config);
-	get_config("text_color", "black", conf, show_text_color_config);
-	get_config("zoom", 100, conf, show_zoom_config);
+	function show_config(pref_set) {
+		show_theme_config(pref_set);
+		show_zoom_config(pref_set);
+	}
+
+	var promise_set = [];
+
+	for (var key in pref_set) {
+		promise_set.push(get_pref(key).then(
+			function(result) {
+				console.log(result);
+				if (result[key]) {
+					pref_set[key] = result[key];
+				}
+			},
+			function(error) {
+				console.log("error on geting pref: " + error);
+			}
+		));
+	}
+
+	Promise.all(promise_set).then(
+		function(result_set) {
+			console.log(result_set);
+			show_config(pref_set);
+		},
+		function(error) {
+			console.log("error on getting prefs: " + error);
+		}
+	);
 });
