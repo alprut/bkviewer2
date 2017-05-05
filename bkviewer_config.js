@@ -29,9 +29,9 @@ $(function(){
 
 	var pref_set = {
 		"theme":	"rounded_box",
-		"frame_color":	"rgb(0,170,204)",
-		"bg_color":	"rgb(255,255,255)",
-		"text_color":	"rgb(0,0,255)",
+		"frame_color":	"#00aacc",
+		"bg_color":	"#ffffff",
+		"text_color":	"#0000ff",
 		"zoom":		100,
 
 		"columns": 6
@@ -135,11 +135,6 @@ $(function(){
 	}
 
 	function show_color_config(pref_set) {
-		var defs = {
-			"frame_color": "rgb(0,170,204)",
-			"bg_color":    "rgb(255,255,255)",
-			"text_color":  "rgb(0,0,255)"
-		};
 		var box_set = $('.color_box');
 
 		box_set.each(function() {
