@@ -110,10 +110,6 @@ return this.each(function() {
 		opts.fini(target, opts.pref_set, context);
 	}
 
-	function test_add_view(target, bk_node, options) {
-		console.log(options);
-	}
-
 	var defaults = {
 		init:		   init,
 		add_category_view: add_category_view,
