@@ -3,14 +3,12 @@ $(function(){
 		function(result) {
 			// Hummm...
 			switch (result.theme) {
-			case "rounded_box":
-				$(".bkviewer").bkviewer_rounded_box();
-				break;
 			case "index":
 				$(".bkviewer").bkviewer_index();
 				break;
+			case "rounded_box":
 			default:
-				console.log(`Unknown theme: ${result}`);
+				$(".bkviewer").bkviewer_rounded_box();
 				break;
 			}
 		},
