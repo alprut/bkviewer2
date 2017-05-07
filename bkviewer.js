@@ -1,16 +1,16 @@
 (function($) {
 $.fn.show_bookmarks = function(options) {
 return this.each(function() {
-	function init(target, context) {
+	function init(target, pref_set, context) {
 	}
 
-	function add_category_view(json, target, context) {
+	function add_category_view(json, target, pref_set, context) {
 	}
 
-	function add_item_view(json, target, context) {
+	function add_item_view(json, target, pref_set, context) {
 	}
 
-	function fini(target, context) {
+	function fini(target, pref_set, context) {
 	}
 
 /* Generic functions */
@@ -57,7 +57,8 @@ return this.each(function() {
 		if (item_set.length != 0) {
 			let json = { "title": category.title};
 
-			opts.add_category_view(json, target, context);
+			opts.add_category_view(json, target, opts.pref_set,
+					       context);
 		}
 
 		for (i = 0; i < item_set.length; i++) {
@@ -70,7 +71,9 @@ return this.each(function() {
 			};
 
 			// TODO: Adds favicon
-			favicon_tag = opts.add_item_view(json, target, context);
+			favicon_tag = opts.add_item_view(json, target,
+							 opts.pref_set,
+							 context);
 		}
 
 		if (! category_is_first) {
@@ -81,38 +84,54 @@ return this.each(function() {
 		}
 	}
 
-	function add_view(target, json, options) {
-		var i;
-		var defaults = {
-			init:		   init,
-			add_category_view: add_category_view,
-			add_item_view:     add_item_view,
-			fini:		   fini
-		};
+	function add_view(target, json, opts) {
 		var context = new Object;
-		var opts = $.extend({}, defaults, options);
 
-		opts.init(target, context);
+		opts.init(target, opts.pref_set, context);
 
 		make_category_view(target, json, context, opts, true);
 
-		opts.fini(target, context);
+		opts.fini(target, opts.pref_set, context);
 	}
 
 	function test_add_view(target, bk_node, options) {
 		console.log(options);
 	}
 
-	var t = $(this);
+	var defaults = {
+		init:		   init,
+		add_category_view: add_category_view,
+		add_item_view:     add_item_view,
+		fini:		   fini,
+		pref_set:	   {}
+	};
+	var opts = $.extend({}, defaults, options);
 
-	browser.bookmarks.getTree().then(
-		function(bk_tree) {
-			// It shows only bookmarks under
-			// the folder "Bookmark Menu".
-			add_view(t, bk_tree[0].children[0], options);
+	var t = $(this);
+	var promise_set = [];
+	var bk_tree = {};
+
+	promise_set.push(browser.bookmarks.getTree().then(
+		function(result) {
+			bk_tree.root = result;
 		},
 		function(error) {
 			console.log(`Error on getting bookmarks: ${error}`);
+		}
+	));
+
+	for (var key in opts.pref_set) {
+		promise_set.push($().get_pref(key, opts.pref_set));
+	}
+
+	Promise.all(promise_set).then(
+		function(result) {
+			// It shows only bookmarks under
+			// the folder "Bookmark Menu".
+			add_view(t, bk_tree.root[0].children[0], opts);
+		},
+		function(error) {
+			console.log(`Err: Getting data from browser: ${error}`);
 		}
 	);
 

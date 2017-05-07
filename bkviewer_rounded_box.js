@@ -106,7 +106,7 @@ return this.each(function() {
 	}
 
 	t.show_bookmarks({
-		add_category_view: function(json, target, context) {
+		add_category_view: function(json, target, pref_set, context) {
 			var result, box = target;
 
 			box = $("<ul />").addClass("bk-category")
@@ -125,7 +125,7 @@ return this.each(function() {
 			context.cur_box = box;
 		},
 
-		add_item_view: function(json, target, context) {
+		add_item_view: function(json, target, pref_set, context) {
 			var box = context.cur_box, atag, img;
 			var default_height;
 
@@ -144,7 +144,7 @@ return this.each(function() {
 			return img;
 		},
 
-		fini: function(target, context) {
+		fini: function(target, pref_set, context) {
 			target.children().children("ul").addClass("bv-clearfix")
 						   .each(function() {
 				var ul = $(this);
@@ -160,14 +160,16 @@ return this.each(function() {
 				});
 			});
 
-			var pref_set = { hiddens: "[]" };
-			get_pref("hiddens", pref_set).then(
-				function(result) {
-					hiddens.items =
-						JSON.parse(pref_set.hiddens);
-					hide_categories(target, hiddens);
-				}
-			);
+			hiddens.items = JSON.parse(pref_set.hiddens);
+			hide_categories(target, hiddens);
+		},
+
+		pref_set: {
+			"hiddens": "[]",
+			"frame_color":	"#00aacc",
+			"bg_color":	"#ffffff",
+			"text_color":	"#0000ff",
+			"zoom":		100
 		}
 	});
 

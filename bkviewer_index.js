@@ -23,11 +23,11 @@ return this.each(function() {
 	}
 
 	t.show_bookmarks({
-		init: function(target, context) {
+		init: function(target, pref_set, context) {
 			context.cur_box = $("<ul />").addClass("bk-box")
 						     .appendTo(target);
 		},
-		add_category_view: function(json, target, context) {
+		add_category_view: function(json, target, pref_set, context) {
 			var box, cur_box = context.cur_box;
 
 			box = $("<li />").text(json["title"])
@@ -39,7 +39,7 @@ return this.each(function() {
 			context.prev = box;
 		},
 
-		add_item_view: function(json, target, context) {
+		add_item_view: function(json, target, pref_set, context) {
 			var box, cur_box = context.cur_box, atag, img;
 
 			box = $("<li />").addClass("bk-item")
@@ -61,7 +61,7 @@ return this.each(function() {
 			return img;
 		},
 
-		fini: function(target, context) {
+		fini: function(target, pref_set, context) {
 			columns = $(".bk-box");
 
 			columns.css({"height": 500});
@@ -72,7 +72,15 @@ return this.each(function() {
 			 });
 
 			equal_spacing(t, columns);
-		}
+		},
+
+		pref_set: {
+			"frame_color":  "#00aacc",
+			"bg_color":     "#ffffff",
+			"text_color":   "#0000ff",
+			"zoom":         100,
+			"columns":	6
+        	}
 	});
 
 	function equal_spacing(box, contents) {
