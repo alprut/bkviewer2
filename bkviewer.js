@@ -105,16 +105,16 @@ return this.each(function() {
 
 	var t = $(this);
 
-	var done;
-
-	done = browser.bookmarks.getTree();
-	done.then(function(bk_tree) {
-			// It shows only bookmarks under the folder "Bookmark Menu".
+	browser.bookmarks.getTree().then(
+		function(bk_tree) {
+			// It shows only bookmarks under
+			// the folder "Bookmark Menu".
 			add_view(t, bk_tree[0].children[0], options);
-		  },
-		  function(error) {
+		},
+		function(error) {
 			console.log(`Error on getting bookmarks: ${error}`);
-		  });
+		}
+	);
 
 })}}) (jQuery);
 
