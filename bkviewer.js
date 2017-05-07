@@ -84,8 +84,24 @@ return this.each(function() {
 		}
 	}
 
+	function wear(dress) {
+		var style = "";
+
+		for (var i in dress) {
+			style += i + " {\n";
+			for (var j in dress[i]) {
+				style += "\t" + j + ":" + dress[i][j] + ";\n";
+			}
+			style += "}\n";
+		}
+
+		$("style").text(style);
+	}
+
 	function add_view(target, json, opts) {
 		var context = new Object;
+
+		wear(opts.dress(opts.pref_set));
 
 		opts.init(target, opts.pref_set, context);
 
@@ -103,7 +119,8 @@ return this.each(function() {
 		add_category_view: add_category_view,
 		add_item_view:     add_item_view,
 		fini:		   fini,
-		pref_set:	   {}
+		pref_set:	   {},
+		dress:		   {}
 	};
 	var opts = $.extend({}, defaults, options);
 
@@ -134,22 +151,5 @@ return this.each(function() {
 			console.log(`Err: Getting data from browser: ${error}`);
 		}
 	);
-
-})}}) (jQuery);
-
-(function($) {
-$.fn.stylist = function(json) {
-return this.each(function() {
-	var style = "";
-
-	for (var i in json) {
-		style += i + " {\n";
-		for (var j in json[i]) {
-			style += "\t" + j + ":" + json[i][j] + ";\n";
-		}
-		style += "}\n";
-	}
-
-        $(this).text(style);
 
 })}}) (jQuery);
