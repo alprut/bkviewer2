@@ -92,20 +92,6 @@ return this.each(function() {
 			"p.configuration": {
 				"text-align": "right",
 			},
-	
-			".tclock": {
-				"text-align": "center",
-				"color":      pref_set.bg_color,
-				"margin-top":  "12px",
-			},
-	
-			".tclock-time": {
-				"font-size": "220%",
-			},
-	
-			".tclock-date": {
-				"font-size": "110%",
-			},
 		};
 
 		return json;
