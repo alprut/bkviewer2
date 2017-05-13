@@ -63,6 +63,12 @@ return this.each(function() {
 				"border-width":  "1px",
 				"border-style":  "solid",
 			},
+
+			"ul.dummy": {
+				"width":   String(column_width) + "px",
+				"padding": "0 0 0 0",
+				"margin":  "0 0 0 0",
+			},
 			
 			"li.bk-category": {
 				"color":	    pref_set.bg_color,
@@ -156,6 +162,11 @@ return this.each(function() {
 			columns = $(".bk-box");
 
 			columns.css({"height": 500});
+
+			for (var i = 0; i < 10; i++) {
+				$("<ul />").addClass("dummy")
+					   .appendTo(target);
+			}
 		},
 
 		pref_set: {
