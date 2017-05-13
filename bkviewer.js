@@ -1,4 +1,20 @@
 (function($) {
+function wear(dress) {
+	var style = "";
+
+	for (var i in dress) {
+		style += i + " {\n";
+		for (var j in dress[i]) {
+			style += "\t" + j + ":" + dress[i][j] + ";\n";
+		}
+		style += "}\n";
+	}
+
+	$("style").text($("style").text() + style);
+}
+
+$.fn.wear = wear;
+
 $.fn.show_bookmarks = function(options) {
 return this.each(function() {
 	function init(target, pref_set, context) {
@@ -82,20 +98,6 @@ return this.each(function() {
 						   context, opts, false);
 			}
 		}
-	}
-
-	function wear(dress) {
-		var style = "";
-
-		for (var i in dress) {
-			style += i + " {\n";
-			for (var j in dress[i]) {
-				style += "\t" + j + ":" + dress[i][j] + ";\n";
-			}
-			style += "}\n";
-		}
-
-		$("style").text(style);
 	}
 
 	function add_view(target, json, opts) {
