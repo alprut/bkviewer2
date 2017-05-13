@@ -7,8 +7,8 @@ $(function(){
 		"bg_color":	"#ffffff",
 		"text_color":	"#0000ff",
 		"zoom":		100,
-
-		"columns": 6
+		"columns":	6,
+		"clock":	"off",
 	};
 
 	function show_rounded_box_config(pref_set) {
@@ -151,10 +151,21 @@ $(function(){
 		selector.css("font-size", selector.parent().css("font-size"));
 	}
 
+	function show_clock_config(pref_set) {
+		var radio_button = $("input[name=clock]");
+		radio_button.val([pref_set.clock])
+			    .change(function() {
+			var new_value = $("input[name=clock]:checked").val();
+			save_pref("clock", new_value, pref_set);
+		});
+	}
+
+
 	function show_config(pref_set) {
 		show_theme_config(pref_set);
 		show_zoom_config(pref_set);
 		show_color_config(pref_set);
+		show_clock_config(pref_set);
 	}
 
 	var promise_set = [];
