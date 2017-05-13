@@ -124,6 +124,9 @@ return this.each(function() {
 				"padding":       "3px 0px",
 				"margin-left":   "0px",
 				"margin-right":  "0px",
+				"display":	 "flex",
+				"flex-wrap":	 "wrap",
+				"justify-content": "space-between",
 			},
 			
 			"li.bk-item": {
