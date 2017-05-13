@@ -45,6 +45,13 @@ return this.each(function() {
 				"font-family": "\"Helvetica Neue\",Helvetica,Arial,sans-serif",
 				"font-size": font_size,
 			},
+
+			".bkviewer": {
+				"display":	   "flex",
+				"flex-wrap":	   "wrap",
+				"justify-content": "space-between",
+			},
+
 			"ul.bk-box": {
 				"width":         String(column_width) + "px",
 				"padding-top":   "0px",
