@@ -167,12 +167,6 @@ return this.each(function() {
 
 			columns.css({"height": 500});
 			target.addClass("bv-clearfix");
-
-			$(window).resize(function() {
-						equal_spacing(t, columns);
-			 });
-
-			equal_spacing(t, columns);
 		},
 
 		pref_set: {
@@ -185,32 +179,4 @@ return this.each(function() {
 
 		dress: dress
 	});
-
-	function equal_spacing(box, contents) {
-		var box_width, item_width, items_num, margin, first_margin;
-		var is_little = false;
-
-		box_width = box.innerWidth() - 1;
-		item_width = contents.outerWidth() + 1;
-
-		items_num = Math.floor(box_width / item_width);
-		if (items_num > contents.length) {
-			items_num = contents.length;
-			is_little = true;
-		}
-
-		margin = Math.floor((box_width % item_width) / items_num / 2);
-		contents.css({"margin-right": margin, "margin-left": margin})
-
-		if (is_little) {
-			/* Don't do equal spacing it there is not enough
-			   items */
-			first_margin = items_num * (2 * margin + item_width);
-			first_margin = box_width - first_margin;
-			first_margin = Math.floor(margin + first_margin / 2);
-			contents.first()
-				.css({"margin-right": margin,
-				      "margin-left": first_margin});
-		}
-	}
 })}}) (jQuery);
