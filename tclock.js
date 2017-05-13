@@ -47,7 +47,7 @@ $.fn.tclock = function(options) {
 		var time_str = twoDigits(hours) + ":" +
 			       twoDigits(minutes);
 
-		var date_str = week_str[day] + " " +
+		var date_str = week_str[day] + ", " +
 			       month_str[month] + " " +
 			       twoDigits(date) + ", " +
 			       year;
