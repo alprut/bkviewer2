@@ -94,22 +94,7 @@ return this.each(function() {
 				"font-family": "\"Helvetica Neue\",Helvetica,Arial,sans-serif",
 				"font-size": font_size,
 			},
-			".bv-clearfix:after": {
-				"content":    "\".\"",
-				"clear":      "both",
-				"display":    "block",
-				"height":     "0",
-				"visibility": "hidden",
-			},
-			
-			"* html .bv-clearfix": {
-				"height": "1%",
-			},
-			
-			".bv-clearfix": {
-				"display": "block",
-			},
-			
+
 			"ul.bk-category": {
 				"padding-top":   "0px",
 				"padding-left":  "0px",
@@ -128,7 +113,6 @@ return this.each(function() {
 				"text-align":       "center",
 				"font-weight":      "bold",
 				"list-style-type":  "none",
-				"clear":            "left",
 				"margin-top":       "0px",
 				"border-radius":    "8px 8px 0px 0px",
 			},
@@ -144,7 +128,6 @@ return this.each(function() {
 			
 			"li.bk-item": {
 				"list-style-type": "none",
-				"float":           "left",
 				"margin-top":      "2px",
 				"margin-bottom":   "2px",
 				"padding-left":    "10px",
