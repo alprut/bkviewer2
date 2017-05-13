@@ -136,7 +136,15 @@ return this.each(function() {
 				"padding-left":    "10px",
 				"padding-right":   "10px",
 			},
-			
+			"li.dummy": {
+				"list-style-type": "none",
+				"margin-top":      "0",
+				"margin-bottom":   "0",
+				"padding-left":    "10px",
+				"padding-right":   "10px",
+			},
+
+
 			"a.bk-item, a.configuration": {
 				"text-decoration": "none",
 				"color": pref_set.text_color,
@@ -211,10 +219,17 @@ return this.each(function() {
 		},
 
 		fini: function(target, pref_set, context) {
-			target.children().children("ul").addClass("bv-clearfix")
-						   .each(function() {
+			target.children().children("ul").each(function() {
 				var ul = $(this);
+
+				/* Tips to fix the last row layout */
+				for (var i = 0; i < 10; i ++) {
+					$("<li />").addClass('dummy')
+						   .appendTo(ul);
+				}
+
 				align_width(ul.children());
+
 			});
 
 			hiddens.items = JSON.parse(pref_set.hiddens);
