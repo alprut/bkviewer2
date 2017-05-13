@@ -45,22 +45,6 @@ return this.each(function() {
 				"font-family": "\"Helvetica Neue\",Helvetica,Arial,sans-serif",
 				"font-size": font_size,
 			},
-			".bv-clearfix:after": {
-				"content":	"\".\"",
-				"clear":	"both",
-				"display":	"block",
-				"height":	"0",
-				"visibility":	"hidden",
-			},
-			
-			"* html .bv-clearfix": {
-				"height":	"1%",
-			},
-			
-			".bv-clearfix": {
-				"display":	"block",
-			},
-			
 			"ul.bk-box": {
 				"width":         String(column_width) + "px",
 				"padding-top":   "0px",
@@ -71,7 +55,6 @@ return this.each(function() {
 				"border-color":  pref_set.frame_color,
 				"border-width":  "1px",
 				"border-style":  "solid",
-				"float":         "left",
 			},
 			
 			"li.bk-category": {
@@ -166,7 +149,6 @@ return this.each(function() {
 			columns = $(".bk-box");
 
 			columns.css({"height": 500});
-			target.addClass("bv-clearfix");
 		},
 
 		pref_set: {
