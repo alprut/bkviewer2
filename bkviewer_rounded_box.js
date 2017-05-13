@@ -40,15 +40,6 @@ return this.each(function() {
 		}
 		box.slideToggle(function() {
 			var ul = $(this);
-			if (ul.css("display") != "none") {
-				/* We have to fix spaces after showing
-				 * the category box, not before it,
-				 * because the width() of hidden items are
-				 * 1pt.
-				 */
-				equal_spacing(ul, ul.children("li.bk-item"));
-			}
-
 			update_hiddens(ul, ul.prev().text(), hiddens);
 		});
 	}
@@ -87,22 +78,6 @@ return this.each(function() {
 		});
 
 		contents.width(item_width + 1);
-	}
-
-	function equal_spacing(box, contents) {
-		var box_width, item_width, items_num, margin;
-
-		contents.css("margin-right", 0);
-
-		box_width = box.innerWidth() - 1;
-		item_width = contents.outerWidth() + 1;
-
-		items_num = Math.floor(box_width / item_width);
-		if (items_num <= contents.length) {
-			margin = (box_width % item_width) / items_num;
-			margin = Math.floor(margin);
-			contents.css("margin-right", margin);
-		}
 	}
 
 	function dress(pref_set) {
@@ -254,15 +229,6 @@ return this.each(function() {
 						   .each(function() {
 				var ul = $(this);
 				align_width(ul.children());
-				equal_spacing(ul, ul.children());
-
-				$(window).resize(function() {
-					/* This condition avoids items from
-					 * setting their width to 0.
-					 */
-					if (ul.css("display") != "none")
-						equal_spacing(ul, ul.children());
-				});
 			});
 
 			hiddens.items = JSON.parse(pref_set.hiddens);
