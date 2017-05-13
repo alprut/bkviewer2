@@ -1,6 +1,7 @@
 $(function(){
 	var pref_set = {
 		"theme":      "rounded_box",
+		"clock":      "off",
 		"bg_color":   "#fff",
 		"text_color": "#0ac",
 		"zoom":	      100,
@@ -32,6 +33,10 @@ $(function(){
 		function(result) {
 
 			body_style(pref_set);
+
+			if (pref_set.clock == "on") {
+				$('.tclock').tclock({});
+			}
 
 			// Hummm...
 			switch (pref_set.theme) {
