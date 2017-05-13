@@ -25,7 +25,6 @@ return this.each(function() {
 	function dress(pref_set) {
 		var json;
 	
-		var font_size = String(pref_set.zoom) + "%";
 		var favicon_size = String(Math.floor(
 						12 * pref_set.zoom / 100.0)
 					 ) + "px";
@@ -39,13 +38,6 @@ return this.each(function() {
 		var column_width = Math.floor(availWidth / pref_set.columns) - 2 - 1 - 10;
 	
 		json = {
-			"body": {
-				"background-color":	pref_set.bg_color,
-				"color":		pref_set.text_color,
-				"font-family": "\"Helvetica Neue\",Helvetica,Arial,sans-serif",
-				"font-size": font_size,
-			},
-
 			".bkviewer": {
 				"display":	   "flex",
 				"flex-wrap":	   "wrap",
