@@ -83,7 +83,7 @@ return this.each(function() {
 			let json = {
 				"title": item.title,
 				"uri":   item.url,
-				"favicon": "icons/favicon.png"
+				"favicon": "chrome://favicon/" + item.url
 			};
 
 			// TODO: Adds favicon

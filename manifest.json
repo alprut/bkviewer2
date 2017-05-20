@@ -27,6 +27,7 @@
 	"permissions": [
 		"bookmarks",
 		"storage",
-		"alarms"
+		"alarms",
+		"chrome://favicon/"
 	]
 }
