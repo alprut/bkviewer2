@@ -93,7 +93,7 @@ $.fn.tclock = function(options) {
 		);
 	});
 
-	const delayInMinutes = 0;
+	const delayInMinutes = 1;
 	const periodInMinutes = 1;
 
 	browser.alarms.create("tclock_alarm",
