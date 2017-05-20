@@ -1,8 +1,8 @@
 function open_bkviewer() {
-	browser.tabs.create({
+	chrome.tabs.create({
 		"url": "/bkviewer.html"
 	});
 }
 
-browser.browserAction.onClicked.addListener(open_bkviewer);
+chrome.browserAction.onClicked.addListener(open_bkviewer);
  

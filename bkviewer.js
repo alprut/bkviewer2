@@ -126,7 +126,17 @@ return this.each(function() {
 	var promise_set = [];
 	var bk_tree = {};
 
-	promise_set.push(browser.bookmarks.getTree().then(
+	function get_bk_tree() {
+		return new Promise(
+			function(resolve, reject) {
+				chrome.bookmarks.getTree(function(tree) {
+					resolve(tree);
+				});
+			}
+		);
+	}
+
+	promise_set.push(get_bk_tree().then(
 		function(result) {
 			bk_tree.root = result;
 		},

@@ -1,20 +1,20 @@
 (function($){
-$.fn.get_pref =
-	function(key, pref_set) {
-		return browser.storage.local.get(key).then(
+$.fn.get_pref = function(key, pref_set) {
+	return new Promise(function(resolve, reject) {
+		chrome.storage.local.get(
 			(function(the_key, the_pref_set) {
 				return function(result) {
 					if (result[the_key]) {
 						the_pref_set[the_key] =
 							result[the_key];
 					}
+
+					resolve();
 				}
-			})(key, pref_set),
-			function(error) {
-				console.log(`error on getting pref: ${error}`);
-			}
+			})(key, pref_set)
 		);
-	}
+	});
+}
 
 $.fn.save_pref =
 	function(key, value, pref_set) {
@@ -22,13 +22,7 @@ $.fn.save_pref =
 
 		pref_set[key] = value;
 		data[key] = value;
-		browser.storage.local.set(data).then(
-			function(result) {
-			},
-			function(error) {
-				console.log(`error on saving pref: ${error}`);
-			}
-		);
+		chrome.storage.local.set(data);
 	}
 
 })(jQuery);

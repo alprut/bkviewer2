@@ -84,7 +84,7 @@ $.fn.tclock = function(options) {
 		targetDate.css("color", opts["color"]);
 
 		tclock_update({ name: "tclock_alarm" }, targetTime, targetDate);
-		browser.alarms.onAlarm.addListener(
+		chrome.alarms.onAlarm.addListener(
 			(function(ttime, tdate) {
 				return function(alarm) {
 					tclock_update(alarm, ttime, tdate);
@@ -96,7 +96,7 @@ $.fn.tclock = function(options) {
 	const delayInMinutes = 1;
 	const periodInMinutes = 1;
 
-	browser.alarms.create("tclock_alarm",
+	chrome.alarms.create("tclock_alarm",
 			      {delayInMinutes, periodInMinutes} );
 
 	return ret;
