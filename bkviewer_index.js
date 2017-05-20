@@ -34,7 +34,7 @@ return this.each(function() {
 		   at most 1.333...px if the page is zoomed in.
 		   The last 10px is space between columns. */
 		var spaces = $(window).width() - $("body").innerWidth();
-		var availWidth = screen.availWidth - spaces - 15;
+		var availWidth = (screen.availWidth / pref_set.zoomFactor) - spaces - 15;
 		var column_width = Math.floor(availWidth / pref_set.columns) - 2 - 1 - 10;
 	
 		json = {
@@ -152,7 +152,8 @@ return this.each(function() {
 			"bg_color":     "#ffffff",
 			"text_color":   "#0000ff",
 			"zoom":         100,
-			"columns":	6
+			"columns":	6,
+			"zoomFactor":	1.0,
         	},
 
 		dress: dress

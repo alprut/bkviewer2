@@ -149,6 +149,20 @@ return this.each(function() {
 		promise_set.push($().get_pref(key, opts.pref_set));
 	}
 
+	promise_set.push(
+		new Promise(
+			function(resolve, reject) {
+				chrome.tabs.getZoom(
+					function(zoomFactor) {
+						opts.pref_set.zoomFactor =
+								zoomFactor;
+						resolve();
+					}
+				);
+			}
+		)
+	);
+
 	Promise.all(promise_set).then(
 		function(result) {
 			// It shows only bookmarks under
