@@ -1,5 +1,5 @@
 {
-	"description": "This shows the formatted bookmarks.",
+	"description": "This arranges bookmarks.",
 	"manifest_version": 2,
 	"name": "BookmarkViewer",
 	"version": "2.0.0",
