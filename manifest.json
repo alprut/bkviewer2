@@ -28,6 +28,7 @@
 		"bookmarks",
 		"storage",
 		"alarms",
+		"tabs",
 		"chrome://favicon/"
 	]
 }

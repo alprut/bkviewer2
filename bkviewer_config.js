@@ -9,6 +9,7 @@ $(function(){
 		"zoom":		100,
 		"columns":	6,
 		"clock":	"off",
+		"newtab":	"off",
 	};
 
 	function show_rounded_box_config(pref_set) {
@@ -160,12 +161,21 @@ $(function(){
 		});
 	}
 
+	function show_newtab_config(pref_set) {
+		var radio_button = $("input[name=newtab]");
+		radio_button.val([pref_set.newtab])
+			    .change(function() {
+			var new_value = $("input[name=newtab]:checked").val();
+			save_pref("newtab", new_value, pref_set);
+		});
+	}
 
 	function show_config(pref_set) {
 		show_theme_config(pref_set);
 		show_zoom_config(pref_set);
 		show_color_config(pref_set);
 		show_clock_config(pref_set);
+		show_newtab_config(pref_set);
 	}
 
 	var promise_set = [];
