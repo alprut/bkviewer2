@@ -2,7 +2,7 @@
 	"description": "This arranges bookmarks.",
 	"manifest_version": 2,
 	"name": "BookmarkViewer",
-	"version": "2.0.0",
+	"version": "2.0.1",
 	"homepage_url": "https://github.com/alprut/bkviewer",
 	"icons": {
 		"16":  "icons/favicon.png",
