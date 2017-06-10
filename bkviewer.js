@@ -165,10 +165,7 @@ return this.each(function() {
 
 	Promise.all(promise_set).then(
 		function(result) {
-			// It shows only bookmarks under
-			// the folder "Bookmark Menu".
-			add_view(t, bk_tree.root[0].children[0], opts);
-			add_view(t, bk_tree.root[0].children[1], opts);
+			add_view(t, bk_tree.root[0], opts);
 		},
 		function(error) {
 			console.log(`Err: Getting data from browser: ${error}`);
